@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <h1 align="center">Temperature &amp; Water Dashboard</h1>
+    
+      <!-- Styles -->
+<style>
+#chartdiv {
+	width	: 100%;
+	height	: 500px;
+}															
+</style>
+
+<!-- Resources -->
+<script src="https://www.amcharts.com/lib/3/amcharts.js"></script>
+<script src="https://www.amcharts.com/lib/3/gauge.js"></script>
+<script src="https://www.amcharts.com/lib/3/plugins/export/export.min.js"></script>
+<link rel="stylesheet" href="https://www.amcharts.com/lib/3/plugins/export/export.css" type="text/css" media="all" />
+<script src="https://www.amcharts.com/lib/3/themes/light.js"></script>
+
+<!-- Chart code -->
+<script>
+var gaugeChart = AmCharts.makeChart( "chartdiv", {
+  "type": "gauge",
+  "theme": "light",
+  "axes": [ {
+    "axisThickness": 1,
+    "axisAlpha": 0.2,
+    "tickAlpha": 0.2,
+    "valueInterval": 20,
+    "bands": [ {
+      "color": "#84b761",
+      "endValue": 90,
+      "startValue": 0
+    }, {
+      "color": "#fdd400",
+      "endValue": 130,
+      "startValue": 90
+    }, {
+      "color": "#cc4748",
+      "endValue": 220,
+      "innerRadius": "95%",
+      "startValue": 130
+    } ],
+    "bottomText": "0 F",
+    "bottomTextYOffset": -20,
+    "endValue": 220
+  } ],
+  "arrows": [ {} ],
+  "export": {
+    "enabled": true
+  }
+} );
+
+setInterval( randomValue, 2000 );
+
+// set random value
+function randomValue() {
+  var value = Math.round( Math.random() * 200 );
+  if ( gaugeChart ) {
+    if ( gaugeChart.arrows ) {
+      if ( gaugeChart.arrows[ 0 ] ) {
+        if ( gaugeChart.arrows[ 0 ].setValue ) {
+          gaugeChart.arrows[ 0 ].setValue( value );
+          gaugeChart.axes[ 0 ].setBottomText( value + " F  " );
+        }
+      }
+    }
+  }
+}
+</script>
+  
+<script>
+window.onload = function () {
+
+var options = 
+{
+	exportEnabled: true,
+	animationEnabled: true,
+	title:{
+		text: "Temperature"
+	},
+	subtitles: [{
+		text: "Click Legend to Hide or Unhide Data Series"
+	}],
+	axisX: {
+		title: "Time (ms)"
+	},
+	axisY: {
+		title: "Temperature (F)",
+		titleFontColor: "#4F81BC",
+		lineColor: "#4F81BC",
+		labelFontColor: "#4F81BC",
+		tickColor: "#4F81BC",
+		includeZero: false
+	},
+	
+	toolTip: {
+		shared: true
+	},
+	legend: {
+		cursor: "pointer",
+		itemclick: toggleDataSeries
+	},
+	data: 
+    [
+        {
+            type: "spline",
+            name: "Temp",
+            showInLegend: true,
+            xValueFormatString: "MMM YYYY",
+            yValueFormatString: "#,##0 F",
+            dataPoints: 
+            [
+                { x: new Date(Date.now()+0),  y: 120 },
+                { x: new Date(Date.now()+1), y: 135 },
+                { x: new Date(Date.now()+2), y: 144 },
+                { x: new Date(Date.now()+3),  y: 103 },
+                { x: new Date(Date.now()+4),  y: 0 },
+                { x: new Date(Date.now()+5),  y: 129 },
+                { x: new Date(Date.now()+6), y: 143 },
+                { x: new Date(Date.now()+7), y: 220 },
+                { x: new Date(Date.now()+8),  y: 122 },
+                { x: new Date(Date.now()+9),  y: 106 },
+                { x: new Date(Date.now()+10),  y: 137 },
+                { x: new Date(Date.now()+11), y: 142 }
+            ]
+        }
+    ]
+};
+var options2 = 
+{
+	exportEnabled: true,
+	animationEnabled: true,
+	title:{
+		text: "Water"
+	},
+	subtitles: [{
+		text: "Click Legend to Hide or Unhide Data Series"
+	}],
+	axisX: {
+		title: "Time (ms)"
+	},
+	axisY: [{
+		title: "No Flood/Flood",
+		titleFontColor: "#4F81BC",
+		lineColor: "#4F81BC",
+		labelFontColor: "#4F81BC",
+		tickColor: "#4F81BC",
+		includeZero: false
+	},
+    {
+        title: "Off/On",
+		titleFontColor: "#ff0000",
+		lineColor: "#ff0000",
+		labelFontColor: "#ff0000",
+		tickColor: "#ff0000",
+		includeZero: false
+    }],
+	
+	toolTip: {
+		shared: true
+	},
+	legend: {
+		cursor: "pointer",
+		itemclick: toggleDataSeries
+	},
+	data: 
+    [
+        {
+            type: "line",
+            name: "No Flood/Flood",
+            showInLegend: true,
+            axisYIndex: 0,
+            xValueFormatString: "MMM YYYY",
+            yValueFormatString: "#,##0 Units",
+            dataPoints: 
+            [
+                { x: new Date(Date.now()+0),  y: 0.2 },
+                { x: new Date(Date.now()+1), y: 0.2 },
+                { x: new Date(Date.now()+2), y: 0.2 },
+                { x: new Date(Date.now()+3),  y: 0.2 },
+                { x: new Date(Date.now()+4),  y: 0.2 },
+                { x: new Date(Date.now()+4),  y: 1 },
+                { x: new Date(Date.now()+5), y: 1 },
+                { x: new Date(Date.now()+6), y: 1 },
+                { x: new Date(Date.now()+7),  y: 1 },
+                { x: new Date(Date.now()+8),  y: 1 },
+                { x: new Date(Date.now()+9),  y: 1 },
+                { x: new Date(Date.now()+10), y: 1 }
+            ]
+        },
+        
+        {
+            type: "line",
+            name: "Off/On",
+            showInLegend: true,
+            axisYIndex: 1,
+            xValueFormatString: "MMM YYYY",
+            yValueFormatString: "#,##0 Units",
+            dataPoints: 
+            [
+                { x: new Date(Date.now()+0),  y: 1 },
+                { x: new Date(Date.now()+1), y: 1 },
+                { x: new Date(Date.now()+2), y: 1 },
+                { x: new Date(Date.now()+3),  y: 1 },
+                { x: new Date(Date.now()+4),  y: 1 },
+                { x: new Date(Date.now()+5),  y: 1 },
+                { x: new Date(Date.now()+5), y: 0.02 },
+                { x: new Date(Date.now()+6), y: 0.02 },
+                { x: new Date(Date.now()+7),  y: 0.02 },
+                { x: new Date(Date.now()+8),  y: 0.02 },
+                { x: new Date(Date.now()+9),  y: 0.02 },
+                { x: new Date(Date.now()+10), y: 0.02 }
+            ]
+        }
+    ]
+};
+$("#chartContainer").CanvasJSChart(options);
+
+    function toggleDataSeries(e) 
+    {
+        if (typeof (e.dataSeries.visible) === "undefined" || e.dataSeries.visible) 
+        {
+            e.dataSeries.visible = false;
+        } else 
+        {
+            e.dataSeries.visible = true;
+        }
+        e.chart.render();
+    }
+
+    
+    $("#chartContainer2").CanvasJSChart(options2);
+
+    function toggleDataSeries(e) 
+    {
+        if (typeof (e.dataSeries.visible) === "undefined" || e.dataSeries.visible) 
+        {
+            e.dataSeries.visible = false;
+        } else 
+        {
+            e.dataSeries.visible = true;
+        }
+        e.chart.render();
+    }
+    
+    
+}
+
+
+
+</script>
+
+    
+
+</head>
+<body>
+    
+
+
+
+
+
+<!-- HTML -->
+<div id="chartdiv"></div>
+    
+    
+    
+<div id="chartContainer" style="height: 300px; width: 100%;"></div>
+    <br><br>
+<div id="chartContainer2" style="height: 300px; width: 100%;">
+    
+    
+
+</div>
+
+<script src="https://canvasjs.com/assets/script/jquery-1.11.1.min.js"></script>
+<script src="https://canvasjs.com/assets/script/jquery.canvasjs.min.js"></script>
+</body>
+</html>

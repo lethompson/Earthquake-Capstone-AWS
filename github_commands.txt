@@ -1,0 +1,8 @@
+git status
+git init
+git config --global -e
+git config --global user.email "tlennox@amazon.com"
+git config --global user.name "Lennox Thompson"
+git config --global -e
+git add .
+git commit

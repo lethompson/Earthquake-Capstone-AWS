@@ -1,0 +1,8 @@
+div.myseisplot {
+  height: 500px;
+}
+
+path.seispath {
+  stroke: lightgreen;
+  fill: none;
+}
