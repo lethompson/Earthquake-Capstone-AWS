@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="utf-8" />
+   <link rel="stylesheet" href="seismic.css">
+</head>
+<body>
+    <!--<h3>Plots most recent 60 seconds of CO.JSC.00.HHZ</h3>
+    <p>Plots most recent 60 seconds of CO.JSC.00.HHZ</p>-->
+<!--<div class='myseisplot' net='CO' sta='JSC' loc='00' start='2017-07-01T16:40:00Z' chan='HHZ' duration='600'>
+</div>-->
+
+
+<div class='myseisplot' net='CO' sta='JSC' loc='00' chan='HHZ' duration='600' >
+</div>
+ 
+<!-- important that this script element is at the end so the DOM exists before it runs. -->
+<!-- older browsers ( and maybe current ones) may need to polyfill. -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/babel-polyfill/6.26.0/polyfill.min.js"></script>
+<script src="http://www.seis.sc.edu/~crotwell/seisplotjs_demo/seisplotjs-waveformplot/example/seisplotjs_waveformplot_1.2.3_standalone.js"></script>
+<script>
+    seisplotjs_waveformplot.createPlotsBySelector('div.myseisplot');
+</script> 
+</body>
+</html>
